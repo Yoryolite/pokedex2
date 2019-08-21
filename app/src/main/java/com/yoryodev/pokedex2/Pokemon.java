@@ -1,14 +1,11 @@
 package com.yoryodev.pokedex2;
 
-import android.graphics.Bitmap;
-
 public class Pokemon {
     String id;
     String name;
     String height;
     String weight;
     String type;
-    Bitmap sprite;
 
     public String getId() {
         return id;
@@ -50,11 +47,4 @@ public class Pokemon {
         this.type = type;
     }
 
-    public Bitmap getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(Bitmap sprite) {
-        this.sprite = sprite;
-    }
 }

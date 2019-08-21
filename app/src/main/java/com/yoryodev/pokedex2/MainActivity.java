@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // en principio vinculo todos mis elementos en pantalla con las variables que designe
 
         pokeNombre = (TextView) findViewById(R.id.txt_nombre);
         pokeId = (TextView) findViewById(R.id.txt_id);
@@ -96,10 +97,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        // Instantiate the RequestQueue with the cache and network.
+
+        // on start dejo la RequestQeueu de volley lista para recibir los request a la POKEAPI
+        // Volley realiza to-do el trabajo a la hora de hacer el manage de los request, una vez
+        // que estos finalizan etc.
+
         requestQueue = Volley.newRequestQueue(this);
 
-// Start the queue
+        // Start the queue
         requestQueue.start();
 
 
@@ -144,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Instancio mi pokemon y extraigo todos los datos de la API.
         pokemon = new Pokemon();
+        float altura =0;
         JSONArray lista = null;
         JSONObject sprites = null;
 
@@ -158,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
             sprites = response.getJSONObject("sprites");
 
-            Log.d("json", "ArmarPokedex: ç"+ sprites.getString("front_default"));
 
             Picasso.get().load(sprites.getString("front_default")).into(pokeSprite);
             pokeSprite.setBackgroundColor(getResources().getColor(R.color.colorBlack));
@@ -176,7 +181,9 @@ public class MainActivity extends AppCompatActivity {
 
         pokeId.setText(pokemon.getId());
         pokeNombre.setText(pokemon.getName());
-        pokeAltura.setText(pokemon.getHeight()+ "Kg");
+        altura = Integer.parseInt(pokemon.getHeight());
+        altura = altura/10;
+        pokeAltura.setText(altura + "M");
 
     }
 }
